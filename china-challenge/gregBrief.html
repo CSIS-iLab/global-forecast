@@ -380,29 +380,37 @@
           document.body.removeChild(link);
         });
 
-      document
+        document
         .getElementById("share-audio")
         .addEventListener("click", function () {
-          // URL you want to copy to the clipboard
-          var audioUrl = document.getElementById("audio").src;
-
-          if (navigator.clipboard) {
-            navigator.clipboard
-              .writeText(audioUrl)
-              .then(function () {
-                console.log("URL copied to clipboard");
-                // Optionally, inform the user that the URL was copied
-                alert("Audio URL copied to clipboard!");
+          // Your share audio functionality, e.g., using the Web Share API
+          if (navigator.share) {
+            navigator
+              .share({
+                title: "Audio Title",
+                url: audio.src,
               })
-              .catch(function (err) {
-                console.error("Error copying URL to clipboard: ", err);
-                // Fallback or error handling code here
-              });
+              .then(() => {
+                console.log("Thanks for sharing!");
+              })
+              .catch(console.error);
           } else {
-            // Clipboard API not available. Consider a fallback (e.g., prompt for manual copy).
-            console.log(
-              "Clipboard API not supported. Implement another sharing method."
-            );
+            // Fallback sharing method, e.g., copying the URL to the clipboard
+            if (navigator.clipboard) {
+              navigator.clipboard
+                .writeText(audio.src)
+                .then(function () {
+                  console.log("URL copied to clipboard");
+                })
+                .catch(function (err) {
+                  console.error("Unable to copy URL to clipboard: ", err);
+                });
+            } else {
+              // Clipboard API not supported, you can use an alternative method here
+              console.log(
+                "Clipboard API not supported. Implement another sharing method."
+              );
+            }
           }
         });
 
