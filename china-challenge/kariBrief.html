@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Audio Player</title>
 
     <style>
@@ -165,6 +166,10 @@
           brightness(107%) contrast(95%);
       }
 
+      #menuContent {
+        display: none;
+      }
+
       .playback-speed-menu {
         position: absolute;
         top: 0; /* Adjust this as needed */
@@ -242,7 +247,7 @@
               id="menu-button"
               alt="Menu"
             />
-            <div class="menu-content" id="menuContent" style="display: none">
+            <div class="menu-content" id="menuContent">
               <button id="download-audio">
                 <img
                   src="https://res.cloudinary.com/csisideaslab/image/upload/v1706148613/Shorthand/Global%20Forecast/download-svgrepo-com.svg"
@@ -271,7 +276,6 @@
             <div
               class="menu-content playback-speed-menu"
               id="playbackSpeedMenu"
-              style="display: none"
             >
               <div id="playbackSpeed">
                 <button id="back-to-options">
