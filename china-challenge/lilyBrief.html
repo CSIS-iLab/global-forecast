@@ -112,6 +112,13 @@
         margin: 10px;
       }
 
+      /* galaxy fold buttons */
+      @media (max-width: 240px) {
+        .svg-icon {
+          width: 30px;
+        }
+      }
+
       .menu-icon {
         width: 1em; /* 1em is equal to the current font size */
         height: 1em; /* 1em is equal to the current font size */
@@ -125,7 +132,8 @@
       }
 
       .filter-light {
-        filter: invert(100%) sepia(59%) saturate(541%) hue-rotate(298deg) brightness(104%) contrast(105%);
+        filter: invert(100%) sepia(59%) saturate(541%) hue-rotate(298deg)
+          brightness(104%) contrast(105%);
       }
 
       .kebab-menu {
@@ -199,7 +207,9 @@
       </div>
       <div class="controls-container">
         <div class="audio-info">
-          <h3 id="title"><i>Audio Brief:</i> Lily McElwee on China's Engagement in the Global South
+          <h3 id="title">
+            <i>Audio Brief:</i> Lily McElwee on China's Engagement in the Global
+            South
           </h3>
         </div>
         <audio
@@ -304,180 +314,183 @@
   </body>
 
   <script>
-document.addEventListener("DOMContentLoaded", function () {
-    var audio = document.getElementById("audio");
-    var playPauseButton = document.getElementById("play-pause");
-    var progressBar = document.getElementById("progressBar");
-    var defaultSpeedButton = document.querySelector("button[data-speed='1']");
-    var checkmarkSVG =
-      '<img class="filter-dark menu-icon" src="https://res.cloudinary.com/csisideaslab/image/upload/v1706152179/Shorthand/Global%20Forecast/checkmark-svgrepo-com_1.svg" alt="Selected">';
+    document.addEventListener("DOMContentLoaded", function () {
+      var audio = document.getElementById("audio");
+      var playPauseButton = document.getElementById("play-pause");
+      var progressBar = document.getElementById("progressBar");
+      var defaultSpeedButton = document.querySelector("button[data-speed='1']");
+      var checkmarkSVG =
+        '<img class="filter-dark menu-icon" src="https://res.cloudinary.com/csisideaslab/image/upload/v1706152179/Shorthand/Global%20Forecast/checkmark-svgrepo-com_1.svg" alt="Selected">';
 
-    /* --------- Update progress bar as audio plays --------- */
-    audio.addEventListener("timeupdate", () => {
-      var percentage = (audio.currentTime / audio.duration) * 100;
-      document.getElementById("progressBar").style.width = percentage + "%";
-    });
+      /* --------- Update progress bar as audio plays --------- */
+      audio.addEventListener("timeupdate", () => {
+        var percentage = (audio.currentTime / audio.duration) * 100;
+        document.getElementById("progressBar").style.width = percentage + "%";
+      });
 
-    /* -------------- Toggle play/pause button -------------- */
-    playPauseButton.addEventListener("click", () => {
-      if (audio.paused) {
-        audio.play();
-        playPauseButton.src =
-          "https://res.cloudinary.com/csisideaslab/image/upload/v1706119327/Shorthand/Global%20Forecast/pause-svgrepo-com.svg"; // Change to the pause icon
-        playPauseButton.alt = "Pause";
-      } else {
-        audio.pause();
-        playPauseButton.src =
-          "https://res.cloudinary.com/csisideaslab/image/upload/v1706117784/Shorthand/Global%20Forecast/play-svgrepo-com.svg"; // Change to the play icon
-        playPauseButton.alt = "Play";
-      }
-    });
-
-    /* ------------------------------------------------------ */
-    /*                      Skip Buttons                      */
-    /* ------------------------------------------------------ */
-    document.getElementById("skip-forward").addEventListener("click", () => {
-      audio.currentTime += 10;
-    });
-
-    document.getElementById("skip-back").addEventListener("click", () => {
-      audio.currentTime -= 10;
-    });
-
-    document.getElementById("skip-to-start").addEventListener("click", () => {
-      audio.currentTime = 0;
-    });
-
-    document.getElementById("skip-to-end").addEventListener("click", () => {
-      audio.currentTime = audio.duration;
-    });
-
-    /* ------------------------------------------------------ */
-    /*                       Kebab Menu                       */
-    /* ------------------------------------------------------ */
-
-    /* -------------- Kebab menu show/hide -------------- */
-    document.getElementById("menu-button").addEventListener("click", () => {
-      var menuContent = document.getElementById("menuContent");
-      menuContent.style.display =
-        menuContent.style.display === "none" ? "block" : "none";
-    });
-
-    /* ------- Kebab menu buttons (download, share, etc) ------ */
-    document.getElementById("download-audio").addEventListener("click", () => {
-      var link = document.createElement("a");
-      /* --------------- LINK TO YOUR AUDIO HERE -------------- */
-      link.href =
-        "https://res.cloudinary.com/dz3ukgab7/video/upload/fl_attachment/f_auto:video,q_auto/v1/GF%20Audio%20Briefs/China_LilyMcElwee";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
-
-    document
-      .getElementById("share-audio")
-      .addEventListener("click", function () {
-        // Your share audio functionality, e.g., using the Web Share API
-        if (navigator.share) {
-          navigator
-            .share({
-              title: "Audio Brief: Lily McElwee on China's Engagement in the Global South",
-              url: audio.src,
-            })
-            .then(() => {
-              console.log("Thanks for sharing!");
-            })
-            .catch(console.error);
+      /* -------------- Toggle play/pause button -------------- */
+      playPauseButton.addEventListener("click", () => {
+        if (audio.paused) {
+          audio.play();
+          playPauseButton.src =
+            "https://res.cloudinary.com/csisideaslab/image/upload/v1706119327/Shorthand/Global%20Forecast/pause-svgrepo-com.svg"; // Change to the pause icon
+          playPauseButton.alt = "Pause";
         } else {
-          // Fallback sharing method, e.g., copying the URL to the clipboard
-          if (navigator.clipboard) {
-            navigator.clipboard
-              .writeText(audio.src)
-              .then(function () {
-                console.log("URL copied to clipboard");
-              })
-              .catch(function (err) {
-                console.error("Unable to copy URL to clipboard: ", err);
-              });
-          } else {
-            // Clipboard API not supported, you can use an alternative method here
-            console.log(
-              "Clipboard API not supported. Implement another sharing method."
-            );
-          }
+          audio.pause();
+          playPauseButton.src =
+            "https://res.cloudinary.com/csisideaslab/image/upload/v1706117784/Shorthand/Global%20Forecast/play-svgrepo-com.svg"; // Change to the play icon
+          playPauseButton.alt = "Play";
         }
       });
 
-    document
-      .getElementById("playback-speed")
-      .addEventListener("click", function () {
-        document.getElementById("menuContent").style.display = "none";
-        document.getElementById("playbackSpeedMenu").style.display = "block";
+      /* ------------------------------------------------------ */
+      /*                      Skip Buttons                      */
+      /* ------------------------------------------------------ */
+      document.getElementById("skip-forward").addEventListener("click", () => {
+        audio.currentTime += 10;
       });
 
-    document
-      .getElementById("back-to-options")
-      .addEventListener("click", function () {
-        document.getElementById("menuContent").style.display = "block";
-        document.getElementById("playbackSpeedMenu").style.display = "none";
+      document.getElementById("skip-back").addEventListener("click", () => {
+        audio.currentTime -= 10;
       });
 
-    /* ------------------------------------------------------ */
-    /*                  Handle playback speed                 */
-    /* ------------------------------------------------------ */
-    var speedOptions = document.querySelectorAll(
-      ".playback-speed-menu button[data-speed]"
-    );
+      document.getElementById("skip-to-start").addEventListener("click", () => {
+        audio.currentTime = 0;
+      });
 
-    speedOptions.forEach(function (button) {
-      button.addEventListener("click", function () {
-        var speed = this.getAttribute("data-speed");
-        audio.playbackRate = parseFloat(speed);
+      document.getElementById("skip-to-end").addEventListener("click", () => {
+        audio.currentTime = audio.duration;
+      });
 
-        // Remove checkmarks from all buttons
-        speedOptions.forEach(function (otherButton) {
-          otherButton.innerHTML = otherButton.textContent;
+      /* ------------------------------------------------------ */
+      /*                       Kebab Menu                       */
+      /* ------------------------------------------------------ */
+
+      /* -------------- Kebab menu show/hide -------------- */
+      document.getElementById("menu-button").addEventListener("click", () => {
+        var menuContent = document.getElementById("menuContent");
+        menuContent.style.display =
+          menuContent.style.display === "none" ? "block" : "none";
+      });
+
+      /* ------- Kebab menu buttons (download, share, etc) ------ */
+      document
+        .getElementById("download-audio")
+        .addEventListener("click", () => {
+          var link = document.createElement("a");
+          /* --------------- LINK TO YOUR AUDIO HERE -------------- */
+          link.href =
+            "https://res.cloudinary.com/dz3ukgab7/video/upload/fl_attachment/f_auto:video,q_auto/v1/GF%20Audio%20Briefs/China_LilyMcElwee";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
         });
 
-        // Add checkmark to the clicked button
-        this.innerHTML = checkmarkSVG + this.textContent;
+      document
+        .getElementById("share-audio")
+        .addEventListener("click", function () {
+          // Your share audio functionality, e.g., using the Web Share API
+          if (navigator.share) {
+            navigator
+              .share({
+                title:
+                  "Audio Brief: Lily McElwee on China's Engagement in the Global South",
+                url: audio.src,
+              })
+              .then(() => {
+                console.log("Thanks for sharing!");
+              })
+              .catch(console.error);
+          } else {
+            // Fallback sharing method, e.g., copying the URL to the clipboard
+            if (navigator.clipboard) {
+              navigator.clipboard
+                .writeText(audio.src)
+                .then(function () {
+                  console.log("URL copied to clipboard");
+                })
+                .catch(function (err) {
+                  console.error("Unable to copy URL to clipboard: ", err);
+                });
+            } else {
+              // Clipboard API not supported, you can use an alternative method here
+              console.log(
+                "Clipboard API not supported. Implement another sharing method."
+              );
+            }
+          }
+        });
+
+      document
+        .getElementById("playback-speed")
+        .addEventListener("click", function () {
+          document.getElementById("menuContent").style.display = "none";
+          document.getElementById("playbackSpeedMenu").style.display = "block";
+        });
+
+      document
+        .getElementById("back-to-options")
+        .addEventListener("click", function () {
+          document.getElementById("menuContent").style.display = "block";
+          document.getElementById("playbackSpeedMenu").style.display = "none";
+        });
+
+      /* ------------------------------------------------------ */
+      /*                  Handle playback speed                 */
+      /* ------------------------------------------------------ */
+      var speedOptions = document.querySelectorAll(
+        ".playback-speed-menu button[data-speed]"
+      );
+
+      speedOptions.forEach(function (button) {
+        button.addEventListener("click", function () {
+          var speed = this.getAttribute("data-speed");
+          audio.playbackRate = parseFloat(speed);
+
+          // Remove checkmarks from all buttons
+          speedOptions.forEach(function (otherButton) {
+            otherButton.innerHTML = otherButton.textContent;
+          });
+
+          // Add checkmark to the clicked button
+          this.innerHTML = checkmarkSVG + this.textContent;
+        });
       });
-    });
 
-    defaultSpeedButton.innerHTML =
-      checkmarkSVG + defaultSpeedButton.textContent;
+      defaultSpeedButton.innerHTML =
+        checkmarkSVG + defaultSpeedButton.textContent;
 
-    defaultSpeedButton.classList.add("selected");
+      defaultSpeedButton.classList.add("selected");
 
-    /* ------------------------------------------------------ */
-    /*            Close menu if user clicks outside           */
-    /* ------------------------------------------------------ */
+      /* ------------------------------------------------------ */
+      /*            Close menu if user clicks outside           */
+      /* ------------------------------------------------------ */
 
-    // This function will check if the clicked element is outside the menu
-    function handleClickOutside(event) {
-      var menuContent = document.getElementById("menuContent");
-      var kebabMenuButton = document.querySelector(".kebab-menu");
+      // This function will check if the clicked element is outside the menu
+      function handleClickOutside(event) {
+        var menuContent = document.getElementById("menuContent");
+        var kebabMenuButton = document.querySelector(".kebab-menu");
 
-      // Check if the clicked area is outside the menu and not the kebab button
-      if (
-        !menuContent.contains(event.target) &&
-        !kebabMenuButton.contains(event.target)
-      ) {
-        menuContent.style.display = "none";
-        // Also hide the playback speed menu if it's open
-        document.getElementById("playbackSpeedMenu").style.display = "none";
+        // Check if the clicked area is outside the menu and not the kebab button
+        if (
+          !menuContent.contains(event.target) &&
+          !kebabMenuButton.contains(event.target)
+        ) {
+          menuContent.style.display = "none";
+          // Also hide the playback speed menu if it's open
+          document.getElementById("playbackSpeedMenu").style.display = "none";
+        }
       }
-    }
 
-    // Attach the listener to the document
-    document.addEventListener("click", handleClickOutside);
+      // Attach the listener to the document
+      document.addEventListener("click", handleClickOutside);
 
-    // Prevent the menu from closing when clicking on the menu itself
-    document
-      .getElementById("menuContent")
-      .addEventListener("click", function (event) {
-        event.stopPropagation();
-      });
-  });
+      // Prevent the menu from closing when clicking on the menu itself
+      document
+        .getElementById("menuContent")
+        .addEventListener("click", function (event) {
+          event.stopPropagation();
+        });
+    });
   </script>
 </html>
