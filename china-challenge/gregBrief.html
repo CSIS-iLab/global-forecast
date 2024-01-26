@@ -210,7 +210,8 @@
       <div class="controls-container">
         <div class="audio-info">
           <h3 id="title">
-            <i>Audio Brief:</i> Gregory C. Allen on U.S.-China Technology Competition
+            <i>Audio Brief:</i> Gregory C. Allen on U.S.-China Technology
+            Competition
           </h3>
         </div>
         <audio
@@ -387,14 +388,15 @@
           document.body.removeChild(link);
         });
 
-        document
+      document
         .getElementById("share-audio")
         .addEventListener("click", function () {
           // Your share audio functionality, e.g., using the Web Share API
           if (navigator.share) {
             navigator
               .share({
-                title: "Audio Brief: Gregory C. Allen on U.S.-China Technology Competition",
+                title:
+                  "Audio Brief: Gregory C. Allen on U.S.-China Technology Competition",
                 url: audio.src,
               })
               .then(() => {
